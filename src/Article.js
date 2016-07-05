@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import CommentsList from './CommentsList';
 
 class Article extends Component {
     state = {
@@ -19,7 +20,7 @@ class Article extends Component {
 //        const { article } = this.props
 //    const { article: { title, text } } = props
         const { isOpen } = this.state
-        const body = isOpen ? <section>{ article.text }</section> : null
+        const body = isOpen ? <section>{ article.text } <CommentsList comments = {article.comments} open = {isOpen} /></section> : null
 
         return (
             <div>
