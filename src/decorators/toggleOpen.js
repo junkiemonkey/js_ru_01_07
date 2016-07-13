@@ -5,9 +5,9 @@ export default (Component) => class DecoratedComponent extends React.Component {
         isOpen: false
     }
 
-    componentWillUpdate(nextProps, nextState) {
-        console.log('---', nextState.isOpen)
-    }
+    // componentWillUpdate(nextProps, nextState) {
+    //     console.log('---', nextState.isOpen)
+    // }
 
     toggleOpen = (ev) => {
         ev.preventDefault()
