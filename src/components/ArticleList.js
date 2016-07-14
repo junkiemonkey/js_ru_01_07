@@ -12,6 +12,7 @@ class ArticleList extends Component {
         selectedArticles: null,
         from: null,
         to: null,
+        //все хорошо, но этот range лишний
         range: null
     }
 
