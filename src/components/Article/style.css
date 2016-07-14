@@ -19,3 +19,7 @@
     opacity: 0.01;
     transition: opacity 300ms ease-in;
 }
+.myDate {
+	max-width: 555px;
+	margin: auto;
+}
