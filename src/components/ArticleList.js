@@ -2,7 +2,7 @@ import React, { Component }  from 'react'
 import Article from './Article/index'
 import oneOpen from '../decorators/oneOpen'
 import Select from 'react-select'
-import DayPicker, { DateUtils } from 'react-day-picker'; 
+import DatePicker, { DateUtils } from 'react-day-picker'; 
 import 'react-select/dist/react-select.css';
 import 'react-day-picker/lib/style.css';
 
@@ -41,7 +41,7 @@ class ArticleList extends Component {
                     value = {this.state.selectedArticles}
                     onChange = {this.handleSelectChange} />   
 
-                <DayPicker
+                <DatePicker
                     className='myDate'
                     ref="daypicker"
                     numberOfMonths={2}
