@@ -3,10 +3,17 @@ import Article from './Article/index'
 import oneOpen from '../decorators/oneOpen'
 import Select from 'react-select'
 import DatePicker, { DateUtils } from 'react-day-picker'; 
+import moment from 'moment';
 import 'react-select/dist/react-select.css';
 import 'react-day-picker/lib/style.css';
 
 class ArticleList extends Component {    
+
+    constructor(props) {
+        super(props);
+        this.handleDayClick = this.handleDayClick.bind(this);
+        this.handleResetClick = this.handleResetClick.bind(this);
+      }
 
     state = {
         selectedArticles: null,
@@ -42,6 +49,16 @@ class ArticleList extends Component {
                     value = {this.state.selectedArticles}
                     onChange = {this.handleSelectChange} />   
 
+                <div className="RangeExample">
+                    {!from && !to && <p>Выберете  <strong>первый день</strong>.</p>}
+                    {from && !to && <p>Выберете <strong>последний</strong>.</p>}
+                    {from && to &&
+                      <p>
+                        Вы выбрали от {moment(from).format('ll')} до {moment(to).format('ll')}.
+                        {' '}<a href="#" onClick={this.handleResetClick}>Reset</a>
+                      </p>
+                    }</div>
+
                 <DatePicker
                     className='myDate'
                     ref="daypicker"
@@ -59,6 +76,13 @@ class ArticleList extends Component {
         const range = DateUtils.addDayToRange(day, this.state);        
         this.setState(range);
     }
+    handleResetClick(e) {
+        e.preventDefault();
+        this.setState({
+          from: null,
+          to: null,
+        });
+      }
 
     handleSelectChange = (selectedArticles) => {
         console.log(selectedArticles)
