@@ -2,10 +2,9 @@ import React, { Component }  from 'react'
 import Article from './Article/index'
 import oneOpen from '../decorators/oneOpen'
 import Select from 'react-select'
-import DatePicker, { DateUtils } from 'react-day-picker'; 
-import moment from 'moment';
-import 'react-select/dist/react-select.css';
-import 'react-day-picker/lib/style.css';
+import 'react-select/dist/react-select.css'
+import DayPicker, { DateUtils } from "react-day-picker"
+import 'react-day-picker/lib/style.css'
 
 class ArticleList extends Component {    
 
@@ -18,9 +17,7 @@ class ArticleList extends Component {
     state = {
         selectedArticles: null,
         from: null,
-        to: null,
-        //все хорошо, но этот range лишний
-        range: null
+        to: null
     }
 
     render() {        
@@ -42,29 +39,19 @@ class ArticleList extends Component {
         return (
             <div>
                 <h1>Article list</h1>
-
+                {this.getRangeTitle()}
                 <Select
                     options = {options}
                     multi = {true}
                     value = {this.state.selectedArticles}
-                    onChange = {this.handleSelectChange} />   
 
-                <div className="RangeExample">
-                    {!from && !to && <p>Выберете  <strong>первый день</strong>.</p>}
-                    {from && !to && <p>Выберете <strong>последний</strong>.</p>}
-                    {from && to &&
-                      <p>
-                        Вы выбрали от {moment(from).format('ll')} до {moment(to).format('ll')}.
-                        {' '}<a href="#" onClick={this.handleResetClick}>Reset</a>
-                      </p>
-                    }</div>
-
-                <DatePicker
-                    className='myDate'
+                    onChange = {this.handleSelectChange}
+                />
+                <DayPicker
                     ref="daypicker"
-                    numberOfMonths={2}
-                    selectedDays={day => DateUtils.isDayInRange(day, { from, to })}
-                    onDayClick={this.handleDayClick} />
+                    selectedDays={day => DateUtils.isDayInRange(day, this.state)}
+                    onDayClick={this.handleDayClick}
+                />
                 <ul>
                     {listItems}
                 </ul>
@@ -72,18 +59,18 @@ class ArticleList extends Component {
         )
     }
 
-    handleDayClick = (e, day) => {
-        const range = DateUtils.addDayToRange(day, this.state);        
-        this.setState(range);
-    }
-    handleResetClick(e) {
-        e.preventDefault();
-        this.setState({
-          from: null,
-          to: null,
-        });
-      }
+    getRangeTitle() {
+        const { from, to } = this.state
+        const fromText = from && `Start date: ${from.toDateString()}`
+        const toText = to && `Finish date: ${to.toDateString()}`
 
+        return <p>{fromText} {toText}</p>
+    }
+
+    handleDayClick = (e, day) => {
+        const range = DateUtils.addDayToRange(day, this.state);
+        this.setState(range)
+    }
     handleSelectChange = (selectedArticles) => {
         console.log(selectedArticles)
         this.setState({
