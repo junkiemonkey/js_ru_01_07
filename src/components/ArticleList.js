@@ -1,7 +1,7 @@
 import React, { Component }  from 'react'
 import Article from './Article/index'
 import oneOpen from '../decorators/oneOpen'
-import Select from 'react-select'
+
 import 'react-select/dist/react-select.css'
 import DayPicker, { DateUtils } from "react-day-picker"
 import 'react-day-picker/lib/style.css'
@@ -11,7 +11,7 @@ class ArticleList extends Component {
     constructor(props) {
         super(props);
         this.handleDayClick = this.handleDayClick.bind(this);
-        this.handleResetClick = this.handleResetClick.bind(this);
+        // this.handleResetClick = this.handleResetClick.bind(this);
       }
 
     state = {
@@ -20,7 +20,7 @@ class ArticleList extends Component {
         to: null
     }
 
-    render() {        
+    render() {
         
         const { articles, isItemOpen, toggleOpenItem } = this.props;
         const { from, to } = this.state;
@@ -40,13 +40,7 @@ class ArticleList extends Component {
             <div>
                 <h1>Article list</h1>
                 {this.getRangeTitle()}
-                <Select
-                    options = {options}
-                    multi = {true}
-                    value = {this.state.selectedArticles}
-
-                    onChange = {this.handleSelectChange}
-                />
+                
                 <DayPicker
                     ref="daypicker"
                     selectedDays={day => DateUtils.isDayInRange(day, this.state)}
@@ -70,13 +64,7 @@ class ArticleList extends Component {
     handleDayClick = (e, day) => {
         const range = DateUtils.addDayToRange(day, this.state);
         this.setState(range)
-    }
-    handleSelectChange = (selectedArticles) => {
-        console.log(selectedArticles)
-        this.setState({
-            selectedArticles
-        })
-    }
+    }   
 }
 
 export default oneOpen(ArticleList)

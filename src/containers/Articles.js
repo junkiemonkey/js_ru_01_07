@@ -7,7 +7,7 @@ class Articles extends Component {
 
     };
 
-    render() {
+    render() {    		
         const { articles } = this.props
         return <ArticleList articles = {articles} />
     }

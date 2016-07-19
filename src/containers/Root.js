@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { Provider } from 'react-redux'
 import Counter from './Counter'
 import Articles from './Articles'
+import SelectComponent from './Select'
 import store from '../store'
 
 class RootContainer extends Component {
@@ -14,6 +15,7 @@ class RootContainer extends Component {
             <Provider store = {store}>
                 <div>
                     <Counter />
+                    <SelectComponent />
                     <Articles />
                 </div>
             </Provider>

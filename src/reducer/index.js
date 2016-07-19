@@ -4,5 +4,6 @@ import { combineReducers } from 'redux'
 
 export default combineReducers({
     count: counter,
-    articles
+    articles,
+    
 })
