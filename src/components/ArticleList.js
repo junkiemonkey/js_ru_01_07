@@ -7,7 +7,7 @@ class ArticleList extends Component {
 
     constructor(props) {
         super(props);
-        this.handleDayClick = this.handleDayClick.bind(this);
+        // this.handleDayClick = this.handleDayClick.bind(this);
         // this.handleResetClick = this.handleResetClick.bind(this);
       }
 
@@ -15,13 +15,12 @@ class ArticleList extends Component {
     render() {
         
         const { articles, isItemOpen, toggleOpenItem } = this.props;
-        const { from, to } = this.state;
+        // const { from, to } = this.state;
 
         const listItems = articles.map((article) => <li key={article.id}>
             <Article article = {article}
                 isOpen = {isItemOpen(article.id)}
-                openArticle = {toggleOpenItem(article.id)}
-            />
+                openArticle = {toggleOpenItem(article.id)} />
         </li>)
 
         return (

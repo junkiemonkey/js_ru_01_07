@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import CommentForm from './CommentForm';
 
 class CommentList extends Component {
 
@@ -25,7 +26,9 @@ class CommentList extends Component {
     }
 
     render() {
-        const { commentObjects, isOpen, toggleOpen } = this.props
+        const { commentObjects, isOpen, toggleOpen, article } = this.props
+
+        
 
         if (!commentObjects || !commentObjects.length) return <h3>no comments yet</h3>
 
@@ -36,6 +39,7 @@ class CommentList extends Component {
             <div>
                 <a href="#" onClick = {toggleOpen} ref="toggler">{linkText}</a>
                 {body}
+                <CommentForm article = {article} />
             </div>
         )
     }

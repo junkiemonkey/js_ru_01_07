@@ -24,13 +24,11 @@ class Filters extends Component {
                     options = {options.toJS()}
                     multi = {true}
                     value = {filters.selectedArticles}
-                    onChange = {this.handleSelectChange}
-                />
+                    onChange = {this.handleSelectChange} />
                 <DayPicker
                     ref="daypicker"
                     selectedDays={day => DateUtils.isDayInRange(day, filters)}
-                    onDayClick={this.handleDayClick}
-                />
+                    onDayClick={this.handleDayClick} />
 
             </div>
         )

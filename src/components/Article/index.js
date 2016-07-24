@@ -29,9 +29,9 @@ class Article extends Component {
 
 
     render() {
-        const { isOpen, openArticle, article: { title, text, comments } } = this.props;
+        const { isOpen, openArticle, article: { title, text, comments, id } } = this.props;
             // console.log(isOpen);
-            const body = isOpen ? <section>{ text } <CommentList comments = {comments} /></section> : null
+            const body = isOpen ? <section>{ text } <CommentList comments = {comments} article = {id} /></section> : null
 
             return (
                 <div className="article">
