@@ -27,8 +27,7 @@ class CommentForm extends Component {
 		)		
 	}
 	addCommentHandler = () =>{
-		const {article} = this.props
-		// console.log(this.state);
+		const {article} = this.props;		
 		this.props.addComment(this.state, article);
 	}
 
