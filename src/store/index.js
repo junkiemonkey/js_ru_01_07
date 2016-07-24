@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import reducer from '../reducer'
 import logger from '../middlewares/logger'
-import addIndex from '../middlewares/addInadex'
+import addIndex from '../middlewares/addIndex'
 
 const dumbMiddleware = store => next => action => next({...action, addition: 'hello world'})
 
