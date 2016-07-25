@@ -17,8 +17,10 @@ export default (comments = defaultComments, action) => {
     // payload.comments.id = action.id;
 
     switch (type) {
-    	case ADD_COMMENT:     		
-    		payload.comment.id = action.commentID;    		
+    	case ADD_COMMENT:   
+    	    //не мутируй payload
+    		payload.comment.id = action.commentID;  
+    		//comments - Map: {commentID: CommentObject}. comments.set(action.commentID, new Comment(payload.comment)
     		return comments.set(payload.comment); // что то не то походу...
     		
     }
