@@ -6,6 +6,7 @@ import addIndex from '../middlewares/addIndex'
 const dumbMiddleware = store => next => action => next({...action, addition: 'hello world'})
 
 const enhancer = compose(
+    //логгер лучше в конце ставить
     applyMiddleware(dumbMiddleware, logger, addIndex),
     window.devToolsExtension ? window.devToolsExtension() : f => f
 )
