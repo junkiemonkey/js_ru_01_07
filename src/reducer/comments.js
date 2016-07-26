@@ -17,11 +17,14 @@ export default (comments = defaultComments, action) => {
     // payload.comments.id = action.id;
 
     switch (type) {
-    	case ADD_COMMENT:   
+    	case ADD_COMMENT:
+            let newComm = payload.comment;
     	    //не мутируй payload
-    		payload.comment.id = action.commentID;  
-    		//comments - Map: {commentID: CommentObject}. comments.set(action.commentID, new Comment(payload.comment)
-    		return comments.set(payload.comment); // что то не то походу...
+            newComm.id = action.commentID;
+    		//comments - Map: {commentID: CommentObject}.
+            return comments.set(action.commentID, new Comment(newComm));
+    		//return comments.set(payload.comment); // что то не то походу...
+            console.log(comments);
     		
     }
 

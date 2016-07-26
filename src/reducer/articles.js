@@ -20,11 +20,9 @@ export default (articles = defaultArticles, action) => {
         case DELETE_ARTICLE:
             return articles.delete(payload.id)
         case ADD_COMMENT:
-            console.log(action);;
             return articles.updateIn([action.article, 'comments'], comments => {
-                comments.push(action.commentID);
+                return comments.concat([action.commentID]);
             });
-            // console.log(action);
 
     }
     //articles.set()

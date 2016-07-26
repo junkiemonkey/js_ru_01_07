@@ -35,8 +35,8 @@ class Filters extends Component {
     }
     getRangeTitle() {
         const { from, to } = this.props.filters
-        const fromText = from && `Start date: ${from.toDateString()}`
-        const toText = to && `Finish date: ${to.toDateString()}`
+        const fromText = from && `Start date: ${from.toDateString()}`;
+        const toText = to && `Finish date: ${to.toDateString()}`;
 
         return <p>{fromText} {toText}</p>
     }
