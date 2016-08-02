@@ -21,9 +21,9 @@ class CommentList extends Component {
     //     console.log('---', 'unmounting')
     // }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.isOpen != this.props.isOpen
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     return nextProps.isOpen != this.props.isOpen
+    // }
 
     render() {
         const { commentObjects, isOpen, toggleOpen, article } = this.props

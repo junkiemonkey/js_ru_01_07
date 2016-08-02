@@ -21,8 +21,8 @@ export default (comments = defaultComments, action) => {
             let newComm = payload.comment;
     	    //не мутируй payload
     	    //это все равно мутация, ведь payload.comment - ссылочный тип данных, поменял в одном месте - поменялось везде
-    	    //newComm = {...payload.comment, id: action.commentID}
-            newComm.id = action.commentID;
+    	    newComm = {...payload.comment, id: action.commentID}
+            // newComm.id = action.commentID;
     		//comments - Map: {commentID: CommentObject}.
             return comments.set(action.commentID, new Comment(newComm));
     		//return comments.set(payload.comment); // что то не то походу...
