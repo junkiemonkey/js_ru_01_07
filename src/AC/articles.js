@@ -23,7 +23,9 @@ export function loadAllArticlesAlt() {
 
         setTimeout(() => {
             $.get('/api/article')
-                .done(response => dispatch({ type: LOAD_ALL_ARTICLES + SUCCESS, response }))
+                .done(response => {                    
+                    dispatch({ type: LOAD_ALL_ARTICLES + SUCCESS, response });
+                })
                 .fail(error => dispatch({ type: LOAD_ALL_ARTICLES + FAIL, error }))
         }, 1000)
 

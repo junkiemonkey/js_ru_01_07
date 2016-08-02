@@ -5,6 +5,7 @@ export const CHANGE_FILTERS = 'CHANGE_FILTERS'
 
 export const ADD_COMMENT = 'ADD_COMMENT'
 
+export const LOAD_ALL_COMMENTS = 'LOAD_ALL_COMMENTS'
 export const LOAD_ALL_ARTICLES = 'LOAD_ALL_ARTICLES'
 
 export const START = '_START'

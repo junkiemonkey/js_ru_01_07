@@ -34,7 +34,7 @@ export default (state = defaultState, action) => {
         case LOAD_ALL_ARTICLES + START:
             return state.set('loading', true)
 
-        case LOAD_ALL_ARTICLES + SUCCESS:
+        case LOAD_ALL_ARTICLES + SUCCESS:            
             return state
                 .set('loading', false)
                 .set('entities', recordsFromArray(Article, response))

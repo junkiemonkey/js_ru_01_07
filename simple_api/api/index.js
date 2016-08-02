@@ -5,7 +5,7 @@ var assign = require('object-assign');
 router.get('/article', function (req, res, next) {
     var articles = mocks.articles.map(function (article) {
             return assign({}, article, {
-                text: undefined
+                // text: undefined
             })
         }),
         limit = Number(req.query.limit) || articles.length,

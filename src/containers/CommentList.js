@@ -2,10 +2,14 @@ import React, { Component, PropTypes } from 'react'
 import Comment from './../components/Comment'
 import NewCommentForm from './../components/NewCommentForm'
 import toggleOpen from '../decorators/toggleOpen'
-import { addComment } from '../AC/comments'
+import { addComment, loadAllComments } from '../AC/comments'
 import { connect } from 'react-redux'
 
 class CommentList extends Component {
+
+    componentDidMount() {
+        this.props.loadAllComments()
+    }
     render() {
         const { commentObjects, isOpen, toggleOpen } = this.props
 
@@ -22,8 +26,8 @@ class CommentList extends Component {
 
     getBody() {
         const { isOpen, article, commentObjects, addComment } = this.props
-        if (!isOpen) return null
-        const commentItems = commentObjects.map(comment => <li key = {comment.id}><Comment comment = {comment}/></li>)
+        if (!isOpen) return null            
+        const commentItems = commentObjects.map(comment => <li key = {comment.id}><Comment comment = {comment}/></li>) 
         return (
             <div>
                 <ul>{commentItems}</ul>
@@ -33,10 +37,15 @@ class CommentList extends Component {
     }
 }
 
-export default connect((state, { article }) => {
+export default connect((state, { article }) => {       
+    
+    const list = state.comments.get('entities');
     return {
-        commentObjects: article.comments.map(id => state.comments.get(id))
+        commentObjects: article.get('comments').map(id => {            
+            return list.valueSeq().get(id);
+        }) 
     }
 }, {
-    addComment
+    addComment, loadAllComments
+
 })(toggleOpen(CommentList))
