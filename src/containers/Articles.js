@@ -1,22 +1,32 @@
 import React, { Component, PropTypes } from 'react'
 import ArticleList from '../components/ArticleList'
 import { connect } from 'react-redux'
+import { loadAllArticles, loadAllArticlesAlt } from '../AC/articles'
 
 class Articles extends Component {
     static propTypes = {
 
     };
 
-    render() {    		
-        const { articles } = this.props
+
+    componentDidMount() {
+        this.props.loadAllArticles()
+    }
+
+    render() {
+        const { articles, loading } = this.props
+        if (loading) return <h1>Loading...</h1>
         return <ArticleList articles = {articles} />
     }
 }
 
 export default connect(({ articles, filters }) => {
     return {
-        articles: filterArticles(articles, filters)
+        loading: articles.get('loading'),
+        articles: filterArticles(articles.get('entities'), filters)
     }
+}, {
+    loadAllArticles: loadAllArticlesAlt
 })(Articles)
 
 function filterArticles(articles, { from, to, selectedArticles }) {
