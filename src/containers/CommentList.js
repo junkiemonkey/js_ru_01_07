@@ -2,14 +2,16 @@ import React, { Component, PropTypes } from 'react'
 import Comment from './../components/Comment'
 import NewCommentForm from './../components/NewCommentForm'
 import toggleOpen from '../decorators/toggleOpen'
-import { addComment, loadAllComments } from '../AC/comments'
+import { addComment, loadComments } from '../AC/comments'
 import { connect } from 'react-redux'
 
 class CommentList extends Component {
 
-    componentDidMount() {
-        this.props.loadAllComments()
+    componentWillReceiveProps({ isOpen, article, loadComments }) {
+        //nexProps.isOpen && !this.props.isOpen
+        if (isOpen && !article.commentsLoaded && !article.commentsLoading) loadComments(article.id)
     }
+
     render() {
         const { commentObjects, isOpen, toggleOpen } = this.props
 
@@ -26,8 +28,9 @@ class CommentList extends Component {
 
     getBody() {
         const { isOpen, article, commentObjects, addComment } = this.props
-        if (!isOpen) return null            
-        const commentItems = commentObjects.map(comment => <li key = {comment.id}><Comment comment = {comment}/></li>) 
+        if (!isOpen) return null
+        if (article.commentsLoading || !article.commentsLoaded) return <h3>Loading...</h3>
+        const commentItems = commentObjects.map(comment => <li key = {comment.id}><Comment comment = {comment}/></li>)
         return (
             <div>
                 <ul>{commentItems}</ul>
@@ -41,11 +44,8 @@ export default connect((state, { article }) => {
     
     const list = state.comments.get('entities');
     return {
-        commentObjects: article.get('comments').map(id => {            
-            return list.valueSeq().get(id);
-        }) 
+        commentObjects: article.comments.map(id => state.comments.getIn(['entities', id]))
     }
 }, {
-    addComment, loadAllComments
-
+    addComment, loadComments
 })(toggleOpen(CommentList))
